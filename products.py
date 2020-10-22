@@ -1,12 +1,21 @@
+import os #載入作業系統
+
 #讀取檔案
-products = []
-with open('products.csv', 'r', encoding = 'utf-8') as f:
-	for line in f:
-		if '商品,價格' in line:
-			continue #繼續（跳過這回，繼續下一回）
-		name, price = line.strip().split(',')
-		products.append([name, price])
-print(products)
+products = [] #不管是否讀取到檔案，都得先有空清單，否則下面代碼(讓使用者輸入/寫入檔案）時無法使用空清單
+if os.path.isfile('products.csv'): #檢查檔案在不在
+	print('找到檔案了！')
+	with open('products.csv', 'r', encoding = 'utf-8') as f: 
+		for line in f:
+			if '商品,價格' in line:
+				continue #繼續（跳過這回，繼續下一回）
+			name, price = line.strip().split(',')
+			products.append([name, price])
+	print(products)
+else:
+	print('找不到檔案')
+
+
+
 
 #使用者輸入
 products = []
